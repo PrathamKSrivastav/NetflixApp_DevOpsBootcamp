@@ -84,23 +84,23 @@ jobs:
             echo ${{ secrets.AWS_ECR_PASSWORD }} | docker login --username ${{ env.AWS_ECR_USERNAME }}  --password-stdin ${{ env.AWS_ECR_REGISTRY }}
           EOF
 
-      #- name: Pulling Docker Images
-       # run: |
-        #  ssh -o StrictHostKeyChecking=no -i ${{ env.PRIVATE_KEY_PATH }} ${{ env.EC2_USER_NAME }}@${{ env.EC2_PUBLIC_ADDRESS }} <<'EOF'
-         #   AWS_ECR_REGISTRY="700935310038.dkr.ecr.us-east-1.amazonaws.com"
+      - name: Pulling Docker Images
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ env.PRIVATE_KEY_PATH }} ${{ env.EC2_USER_NAME }}@${{ env.EC2_PUBLIC_ADDRESS }} <<'EOF'
+            AWS_ECR_REGISTRY="700935310038.dkr.ecr.us-east-1.amazonaws.com"
 
-          #  AWS_ECR_REPOSITORY=ai-pratham3/netflix-catalog
-           # IMAGE_NAME="${AWS_ECR_REGISTRY}/${AWS_ECR_REPOSITORY}:latest"
+            AWS_ECR_REPOSITORY=ai-pratham3/netflix-catalog
+            IMAGE_NAME="${AWS_ECR_REGISTRY}/${AWS_ECR_REPOSITORY}:latest"
             
-            #echo "Pulling ${IMAGE_NAME} ..."
-            #docker pull "${IMAGE_NAME}"
+            echo "Pulling ${IMAGE_NAME} ..."
+            docker pull "${IMAGE_NAME}"
 
-            #AWS_ECR_REPOSITORY="ai-pratham3/netflix-frontend"
-            #IMAGE_NAME="${AWS_ECR_REGISTRY}/${AWS_ECR_REPOSITORY}:latest"
+            AWS_ECR_REPOSITORY="ai-pratham3/netflix-frontend"
+            IMAGE_NAME="${AWS_ECR_REGISTRY}/${AWS_ECR_REPOSITORY}:latest"
             
-            #echo "Pulling ${IMAGE_NAME} ..."
-            #docker pull "${IMAGE_NAME}"
-         # EOF
+            echo "Pulling ${IMAGE_NAME} ..."
+            docker pull "${IMAGE_NAME}"
+          EOF
 
 
       - name: Execute deployment script
